@@ -1,5 +1,4 @@
 # KI-basiertes Taktzeit-Monitoring für menschliche Montageprozesse in der Mensch-Roboter-Kollaboration
-(Bsher Karbouj – TU Berlin)
 
 Dieses Projekt dient der Entwicklung eines KI-basierten Systems zur Überwachung und Analyse von Taktzeiten in menschlichen Montageprozessen, insbesondere in der Mensch-Roboter-Kollaboration.
 
@@ -16,18 +15,18 @@ Dieses Projekt dient der Entwicklung eines KI-basierten Systems zur Überwachung
 - Programmierkenntnisse in Python/C++
 - Engagierte und selbstständige Arbeitsweise
 
-
 ---
 
 # YOLO + MediaPipe Hand Tracking mit Basler Kamera
 
-Dieses Projekt bietet ein Python-Skript für die Echtzeit-Handerkennung und Objekterkennung mit YOLO und MediaPipe. Unterstützt werden sowohl Basler-Industriekameras (über pypylon) als auch Standard-Webcams (über OpenCV).
+Dieses Projekt bietet Python-Skripte für die Echtzeit-Handerkennung und Objekterkennung mit YOLO und MediaPipe. Unterstützt werden sowohl Basler-Industriekameras (über pypylon) als auch Standard-Webcams (über OpenCV).
 
 ## Features
 - Hand-Tracking mit MediaPipe
 - Objekterkennung mit YOLO (GPU-beschleunigt, falls verfügbar)
-- Unterstützung für Basler-Kameras (ROI-Cropping für Performance)
+- Unterstützung für Basler-Kameras (volle Sensorfläche oder ROI)
 - Flexible Umschaltung zwischen Kameraquellen
+- Automatische Videoaufnahme und Speicherung in den Ordner `videos/` (wird nicht versioniert)
 - Einfache Konfiguration und Automatisierung (Batch-Datei)
 
 ## Voraussetzungen
@@ -47,9 +46,9 @@ Dieses Projekt bietet ein Python-Skript für die Echtzeit-Handerkennung und Obje
    pip install -r requirements.txt
    ```
 
-## Ausführung des Skripts
+## Ausführung der Skripte
 
-### Mit virtueller Umgebung (empfohlen)
+### Hand- und Objekterkennung (YOLO + MediaPipe)
 1. Virtuelle Umgebung aktivieren:
    ```powershell
    .venv\Scripts\activate
@@ -58,11 +57,22 @@ Dieses Projekt bietet ein Python-Skript für die Echtzeit-Handerkennung und Obje
    ```powershell
    python src/yolo_mediapipe_test.py
    ```
-   - Standardmäßig ist das Capturing aktiviert, wenn `CAPTURE_ENABLED = True` im Skript gesetzt ist.
    - Für eine bestimmte Kamera (z.B. Index 1):
      ```powershell
      python src/yolo_mediapipe_test.py --camera 1
      ```
+
+### Videoaufnahme (Rohvideo)
+1. Virtuelle Umgebung aktivieren:
+   ```powershell
+   .venv\Scripts\activate
+   ```
+2. Aufnahme starten (endet mit 'q'):
+   ```powershell
+   python src/raw_video_capture.py
+   ```
+   - Die Videos werden automatisch mit Zeitstempel im Ordner `videos/` gespeichert.
+   - Der Ordner `videos/` ist in `.gitignore` eingetragen und wird nicht versioniert.
 
 ### Mit Batch-Datei (Windows)
 Die Batch-Datei `run_yolo_mediapipe.bat` automatisiert Aktivierung und Start:
@@ -78,14 +88,12 @@ Doppelklick auf `run_yolo_mediapipe.bat` startet das Skript.
 
 ## Hinweise
 - Capturing kann über die Variable `CAPTURE_ENABLED` im Skript aktiviert/deaktiviert werden.
-- Bei Basler-Kameras wird das Bild automatisch auf einen mittigen 640x480-Bereich gecroppt.
 - Für Webcams wird der Standard- oder angegebene Kamera-Index verwendet.
 - Mit `q` im Vorschaufenster kann das Programm beendet werden.
+- Die aufgenommenen Videos werden im Ordner `videos/` gespeichert und nicht versioniert.
 
 ## Troubleshooting
 - Fehlende Abhängigkeiten? Sicherstellen, dass die virtuelle Umgebung aktiv ist und alle Pakete installiert sind.
-- Probleme mit Basler-ROI? Unterstützte Auflösungen der Kamera prüfen und ggf. `ROI_W` und `ROI_H` im Skript anpassen.
+- Probleme mit Basler-Auflösung? Unterstützte Auflösungen der Kamera prüfen und ggf. die Werte im Skript anpassen.
 
 ---
-
-**Autor:** Bsher Karbouj (TU Berlin)
