@@ -54,21 +54,26 @@ def main():
         cam_idx = min(args.camera, len(devices)-1)
         camera1 = pylon.InstantCamera(tl_factory.CreateDevice(devices[cam_idx]))
         camera1.Open()
-        # Set Basler camera ROI (crop in the middle) AFTER Open, BEFORE StartGrabbing
-        ROI_W = 640
-        ROI_H = 480
-        offset_x = int((camera1.Width.Value - ROI_W) / 2)
-        offset_y = int((camera1.Height.Value - ROI_H) / 2)
-        camera1.Width.Value = ROI_W
-        camera1.Height.Value = ROI_H
-        camera1.OffsetX.Value = offset_x
-        camera1.OffsetY.Value = offset_y
+        # Do not set ROI, use full sensor area
+        # ROI_W = 640
+        # ROI_H = 480
+        # offset_x = int((camera1.Width.Value - ROI_W) / 2)
+        # offset_y = int((camera1.Height.Value - ROI_H) / 2)
+        # offset_x = offset_x - (offset_x % 4)
+        # offset_y = offset_y - (offset_y % 4)
+        # camera1.Width.Value = ROI_W
+        # camera1.Height.Value = ROI_H
+        # camera1.OffsetX.Value = offset_x
+        # camera1.OffsetY.Value = offset_y
+        # Set camera to full sensor area (maximum width and height)
+        camera1.Width.Value = camera1.Width.Max
+        camera1.Height.Value = camera1.Height.Max
+        width = camera1.Width.Value
+        height = camera1.Height.Value
         camera1.StartGrabbing()
         converter = pylon.ImageFormatConverter()
         converter.OutputPixelFormat = pylon.PixelType_RGB8packed
         converter.OutputBitAlignment = pylon.OutputBitAlignment_MsbAligned
-        width = ROI_W
-        height = ROI_H
         fps = 30
     else:
         print("Basler camera not available, falling back to OpenCV webcam...")

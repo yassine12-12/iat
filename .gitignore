@@ -71,7 +71,7 @@ coverage.xml
 .vscode/
 
 # Data and model files
-# runs/  # <--- Commented out to allow .gitkeep in runs/ to be tracked
+runs/
 *.pt
 *.pth
 *.h5
