@@ -92,6 +92,19 @@ pause
 
 Doppelklick auf `run_yolo_mediapipe.bat` startet das Skript direkt.
 
+### Extrahieren von Frames aus Videos für Annotation
+Um die Videos aus dem Ordner `videos/` für die Annotation (z.B. mit Roboflow) vorzubereiten, kannst du das Skript `src/extract_frames.py` verwenden. Es extrahiert standardmäßig jedes 10. Frame aus allen Videos und speichert die Bilder in `videos/frames/` (je ein Unterordner pro Video).
+
+**Nutzung:**
+```powershell
+python src/extract_frames.py
+```
+- Passe die Variable `FRAME_SKIP` im Skript an, um mehr oder weniger Frames zu extrahieren.
+- Die extrahierten Bilder kannst du dann gesammelt zu Roboflow hochladen und annotieren.
+
+**Empfehlung:**
+Für die meisten Annotationszwecke reicht es, nur jedes 10. oder 20. Frame zu extrahieren, um Redundanz zu vermeiden und die Annotation effizienter zu gestalten.
+
 ## Hinweise
 - Capturing kann über die Variable `CAPTURE_ENABLED` im Skript aktiviert/deaktiviert werden.
 - Für Webcams wird der Standard- oder angegebene Kamera-Index verwendet.
