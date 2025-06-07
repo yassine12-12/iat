@@ -75,8 +75,14 @@ Dieses Projekt bietet Python-Skripte für die Echtzeit-Handerkennung und Objekte
    - Der Ordner `videos/` ist in `.gitignore` eingetragen und wird nicht versioniert.
 
 ### Mit Batch-Datei (Windows)
-Die Batch-Datei `run_yolo_mediapipe.bat` automatisiert Aktivierung und Start:
+Die Batch-Datei `run_yolo_mediapipe.bat` automatisiert die Aktivierung der Python-Umgebung und den Start des Hand-/Objekterkennungs-Skripts. Sie sorgt dafür, dass du das Skript bequem per Doppelklick starten kannst, ohne manuell die virtuelle Umgebung aktivieren oder Befehle in der Konsole eingeben zu müssen.
 
+**Ablauf der Batch-Datei:**
+- Aktiviert die virtuelle Umgebung (`.venv`)
+- Startet das Skript `src/yolo_mediapipe_test.py`
+- Wartet auf Tastendruck, damit das Fenster nicht sofort schließt
+
+**Inhalt der Batch-Datei:**
 ```bat
 @echo off
 call .venv\Scripts\activate.bat
@@ -84,7 +90,7 @@ python src/yolo_mediapipe_test.py
 pause
 ```
 
-Doppelklick auf `run_yolo_mediapipe.bat` startet das Skript.
+Doppelklick auf `run_yolo_mediapipe.bat` startet das Skript direkt.
 
 ## Hinweise
 - Capturing kann über die Variable `CAPTURE_ENABLED` im Skript aktiviert/deaktiviert werden.
