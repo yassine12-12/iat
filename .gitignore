@@ -71,7 +71,7 @@ coverage.xml
 .vscode/
 
 # Data and model files
-runs/
+# runs/
 *.pt
 *.pth
 *.h5
@@ -82,3 +82,6 @@ runs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Exclude the videos folder from git
+videos/
